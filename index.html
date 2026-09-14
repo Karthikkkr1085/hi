@@ -762,10 +762,20 @@ input,select,textarea,button{font-family:inherit}
           </sc-if>
           <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid #EDF3FA">
             <span style="font-size:12.5px;color:#8FA6BC;max-width:46ch;text-wrap:pretty">Every edit needs a reason. Nothing is overwritten: finovrr's value, L1's and yours are all kept.</span>
-            <div style="display:flex;flex-wrap:wrap;gap:12px">
-              <button onClick="{{ onReturnToL1 }}" style="border:1px solid #D9E5F2;border-radius:10px;background:#fff;color:#103B66;font-size:14px;font-weight:600;padding:12px 20px;cursor:pointer" style-hover="border-color:#1677E8;color:#1677E8">Return to L1</button>
-              <button onClick="{{ onApproveClose }}" style="border:0;border-radius:10px;background:#1677E8;color:#fff;font-size:14px;font-weight:600;padding:12px 22px;cursor:pointer" style-hover="background:#2D8CFF">Approve and close</button>
-            </div>
+            <sc-if value="{{ l2Pending }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-wrap:wrap;gap:12px">
+                <button onClick="{{ onReturnToL1 }}" style="border:1px solid #D9E5F2;border-radius:10px;background:#fff;color:#103B66;font-size:14px;font-weight:600;padding:12px 20px;cursor:pointer" style-hover="border-color:#1677E8;color:#1677E8">Return to L1</button>
+                <button onClick="{{ onApproveClose }}" style="border:0;border-radius:10px;background:#1677E8;color:#fff;font-size:14px;font-weight:600;padding:12px 22px;cursor:pointer" style-hover="background:#2D8CFF">Approve and close</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ l2Approved }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+                <span style="display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;color:#1E8E4E"><span style="width:20px;height:20px;border-radius:50%;background:#1E8E4E;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center">✓</span>Approved and closed</span>
+                <button onClick="{{ openExport }}" style="border:1px solid #1677E8;border-radius:10px;background:#fff;color:#1677E8;font-size:14px;font-weight:600;padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:9px" style-hover="background:#F2F8FF">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"></path><path d="M14 3v4h4M12 11v6M9.5 14.5l2.5 2.5 2.5-2.5"></path></svg>Export summary PDF</button>
+                <button onClick="{{ goDashboard }}" style="border:0;border-radius:10px;background:#1677E8;color:#fff;font-size:14px;font-weight:600;padding:12px 22px;cursor:pointer" style-hover="background:#2D8CFF">Return to Dashboard</button>
+              </div>
+            </sc-if>
           </div>
         </div>
       </div>
@@ -840,6 +850,32 @@ input,select,textarea,button{font-family:inherit}
         <p style="margin:0 0 22px;font-size:14px;line-height:1.55;color:#60758A">This module is part of the Finovrr administration area.</p>
         <div style="display:flex;justify-content:flex-end">
           <button onClick="{{ closeConfigModal }}" style="border:0;border-radius:10px;background:#1677E8;color:#fff;font-size:14px;font-weight:600;padding:11px 20px;cursor:pointer">Close</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ exportOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(11,42,74,.55);display:flex;align-items:center;justify-content:center;padding:28px;z-index:75" onClick="{{ closeExport }}">
+      <div role="dialog" aria-modal="true" aria-label="Export summary PDF" onClick="{{ stop }}" style="background:#fff;border-radius:14px;box-shadow:0 24px 60px rgba(11,42,74,.3);width:100%;max-width:560px;max-height:100%;overflow:auto;padding:26px">
+        <h2 style="margin:0;font-size:19px;font-weight:700;color:#0B2A4A">Export summary PDF</h2>
+        <p style="margin:10px 0 18px;font-size:13.5px;color:#60758A">Preview of the sign-off summary. Generation is mocked in this prototype.</p>
+        <div style="border:1px solid #D9E5F2;border-radius:12px;padding:20px;background:#F7FBFF">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <span style="font-size:15px;font-weight:700;color:#0B2A4A">Acme Holdings onboarding</span>
+            <span style="background:#E6F6EC;color:#1E8E4E;border-radius:6px;padding:5px 10px;font-size:10.5px;font-weight:700;letter-spacing:.08em">APPROVED</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-top:16px">
+            <div><div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;color:#8FA6BC">CLIENT ID</div><div style="font-size:13.5px;font-weight:600;margin-top:4px">{{ l2ClientId }}</div></div>
+            <div><div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;color:#8FA6BC">SEVERITY</div><div style="font-size:13.5px;font-weight:600;margin-top:4px">{{ l2Severity }}</div></div>
+            <div><div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;color:#8FA6BC">L1 EDITS</div><div style="font-size:13.5px;font-weight:600;margin-top:4px">{{ l1EditCount }}</div></div>
+            <div><div style="font-size:10.5px;font-weight:700;letter-spacing:.09em;color:#8FA6BC">L2 EDITS</div><div style="font-size:13.5px;font-weight:600;margin-top:4px">{{ l2EditCount }}</div></div>
+          </div>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid #E1ECF8;font-size:13px;line-height:1.6;color:#41627F;text-wrap:pretty">142 articles assessed · 18 relevant · 7 manual review. Case graded {{ l2Severity }} on the 2024 procurement fraud charge. Signed off by {{ userName }} on {{ today }}.</div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:22px">
+          <button onClick="{{ closeExport }}" style="border:1px solid #D9E5F2;border-radius:10px;background:#fff;color:#103B66;font-size:14px;font-weight:600;padding:11px 18px;cursor:pointer">Cancel</button>
+          <button onClick="{{ onExportPdf }}" style="border:0;border-radius:10px;background:#1677E8;color:#fff;font-size:14px;font-weight:600;padding:11px 20px;cursor:pointer">Download PDF</button>
         </div>
       </div>
     </div>
@@ -1241,7 +1277,14 @@ class Component extends DCLogic {
         this.go("review");
         this.toast("Returned to L1 for rework");
       },
-      onApproveClose: () => { this.setState({ l2Status: "APPROVED" }); this.toast("Case approved and closed"); },
+      onApproveClose: () => { this.setState({ l2Status: "APPROVED", exportOpen: true }); this.toast("Case approved and closed"); },
+      l2Pending: s.l2Status !== "APPROVED",
+      l2Approved: s.l2Status === "APPROVED",
+      l2EditCount: s.l2Edits.length,
+      exportOpen: !!s.exportOpen,
+      openExport: () => this.setState({ exportOpen: true }),
+      closeExport: () => this.setState({ exportOpen: false }),
+      onExportPdf: () => { this.setState({ exportOpen: false }); this.toast("Summary PDF exported"); this.go("dashboard"); },
 
       configModal: s.configModal,
       openConfigUsers: () => this.setState({ configModal: "User Management" }),
