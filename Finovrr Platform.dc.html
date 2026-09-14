@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F4F7FC;color:#0F2444;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1A56C4;text-decoration:none}
+a:hover{color:#0F3E9A;text-decoration:underline}
+input{font-family:inherit}
+@keyframes fvFade{from{opacity:0}to{opacity:1}}
+@keyframes fvRise{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+
+<sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif">
+  <div style="position:relative;overflow:hidden;background:#0B1F3A;padding:56px 56px 48px;display:flex;flex-direction:column;justify-content:space-between;min-height:100vh">
+    <div style="position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(115deg,rgba(255,255,255,.055) 0 1px,transparent 1px 13px)"></div>
+    <div style="position:absolute;right:-160px;top:90px;width:520px;height:520px;border:1px solid rgba(120,170,255,.22);border-radius:50%"></div>
+    <div style="position:absolute;right:-60px;top:190px;width:320px;height:320px;border:1px solid rgba(120,170,255,.3);border-radius:50%"></div>
+    <div style="position:absolute;right:60px;top:300px;width:100px;height:100px;background:rgba(46,120,235,.35);border-radius:50%;filter:blur(2px)"></div>
+    <div style="position:relative;display:flex;align-items:center;gap:12px">
+      <div style="width:34px;height:34px;border-radius:9px;background:#2E78EB;display:flex;align-items:center;justify-content:center">
+        <div style="width:13px;height:13px;border:2.5px solid #fff;border-radius:3px;transform:rotate(45deg)"></div>
+      </div>
+      <span style="font-size:21px;font-weight:600;letter-spacing:-.015em;color:#fff">Finovrr</span>
+    </div>
+    <div style="position:relative;max-width:440px">
+      <h1 style="margin:0 0 18px;font-size:40px;line-height:1.14;font-weight:600;letter-spacing:-.025em;color:#fff;text-wrap:pretty">Financial Intelligence for a Safer Tomorrow</h1>
+      <p style="margin:0;font-size:15px;line-height:1.65;color:rgba(205,222,250,.78)">A unified workspace for investigators, analysts and compliance teams — case intake, entity resolution and risk review in one auditable trail.</p>
+      <div style="display:flex;gap:38px;margin-top:44px;padding-top:26px;border-top:1px solid rgba(125,165,225,.2)">
+        <div></div>
+        <div><div style="font-family:'IBM Plex Mono',monospace;font-size:22px;color:#fff">24/7</div><div style="font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:rgba(190,212,246,.62);margin-top:5px">Monitoring</div></div>
+      </div>
+    </div>
+    <div style="position:relative;font-size:11.5px;color:rgba(170,195,235,.5)">© 2026 Finovrr · Internal use only</div>
+  </div>
+
+  <div style="background:linear-gradient(180deg,#FBFCFE,#F1F5FC);display:flex;align-items:center;justify-content:center;padding:48px 40px;min-height:100vh">
+    <div style="width:100%;max-width:404px">
+      <h2 style="margin:0 0 7px;font-size:27px;font-weight:600;letter-spacing:-.02em;color:#0F2444">Welcome to Finovrr</h2>
+      <p style="margin:0 0 30px;font-size:14.5px;color:#5B6B85">Sign in to your account</p>
+
+      <label style="display:block;font-size:12.5px;font-weight:500;color:#33486A;margin-bottom:7px">Username or Email</label>
+      <input type="text" value="{{ loginUser }}" onChange="{{ onUser }}" placeholder="karthik.r@finovrr.com" style="width:100%;height:44px;padding:0 13px;border:1px solid #DCE4F0;border-radius:7px;background:#fff;font-size:14px;color:#0F2444;outline:none;margin-bottom:18px" style-focus="border-color:#2E78EB;box-shadow:0 0 0 3px rgba(46,120,235,.14)">
+
+      <label style="display:block;font-size:12.5px;font-weight:500;color:#33486A;margin-bottom:7px">Password</label>
+      <div style="position:relative;margin-bottom:16px">
+        <input type="{{ pwType }}" value="{{ loginPass }}" onChange="{{ onPass }}" placeholder="••••••••••" style="width:100%;height:44px;padding:0 44px 0 13px;border:1px solid #DCE4F0;border-radius:7px;background:#fff;font-size:14px;color:#0F2444;outline:none" style-focus="border-color:#2E78EB;box-shadow:0 0 0 3px rgba(46,120,235,.14)">
+        <button onClick="{{ togglePw }}" title="Show password" style="position:absolute;right:6px;top:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;border-radius:6px;cursor:pointer;color:#7C8CA6" style-hover="background:#EEF3FB;color:#1A56C4">
+          <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 9s2.9-4.6 8-4.6S17 9 17 9s-2.9 4.6-8 4.6S1 9 1 9Z"></path><circle cx="9" cy="9" r="2.2"></circle></svg>
+        </button>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#33486A;cursor:pointer">
+          <input type="checkbox" checked="{{ remember }}" onChange="{{ onRemember }}" style="width:15px;height:15px;accent-color:#1A56C4;margin:0">
+          Remember me
+        </label>
+        <a href="#reset" style="font-size:13px;font-weight:500">Forgot password?</a>
+      </div>
+
+      <div style="margin-bottom:22px">
+        <div style="font-size:12.5px;font-weight:500;color:#33486A;margin-bottom:8px">Sign in as</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button onClick="{{ pickAdmin }}" style="height:38px;border-radius:7px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;border:1px solid {{ adminBorder }};background:{{ adminBg }};color:{{ adminFg }}">Administrator</button>
+          <button onClick="{{ pickAnalyst }}" style="height:38px;border-radius:7px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;border:1px solid {{ analystBorder }};background:{{ analystBg }};color:{{ analystFg }}">Analyst</button>
+        </div>
+      </div>
+
+      <button onClick="{{ signIn }}" style="width:100%;height:46px;border:none;border-radius:7px;background:#1A56C4;color:#fff;font-family:inherit;font-size:14.5px;font-weight:600;letter-spacing:.01em;cursor:pointer;box-shadow:0 1px 2px rgba(15,36,68,.18)" style-hover="background:#12459F" style-active="background:#0E3B8C">Sign In</button>
+      
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="min-height:100vh;display:flex;font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;background:#F4F7FC">
+
+  <aside style="width:244px;flex:0 0 244px;background:#0B1F3A;display:flex;flex-direction:column;padding:22px 14px 18px;position:sticky;top:0;height:100vh">
+    <div style="display:flex;align-items:center;gap:11px;padding:0 8px 24px">
+      <div style="width:30px;height:30px;border-radius:8px;background:#2E78EB;display:flex;align-items:center;justify-content:center">
+        <div style="width:11px;height:11px;border:2.5px solid #fff;border-radius:3px;transform:rotate(45deg)"></div>
+      </div>
+      <span style="font-size:18px;font-weight:600;letter-spacing:-.015em;color:#fff">Finovrr</span>
+    </div>
+    <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(160,190,235,.45);padding:0 10px 10px">Workspace</div>
+    <nav style="display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ nav }}" as="item" hint-placeholder-count="3">
+        <button onClick="{{ item.go }}" style="display: flex; align-items: center; gap: 11px; width: 211px; padding: 0 11px; height: 68px; border: none; border-radius: 8px; font-family: inherit; font-size: 13.5px; font-weight: 500; text-align: left; cursor: pointer; background: {{ item.bg }}; color: {{ item.fg }}" style-hover="background:rgba(255,255,255,.09);color:#fff">
+          <span style="width:17px;height:17px;display:flex;align-items:center;justify-content:center;flex:0 0 17px">{{ item.icon }}</span>
+          {{ item.label }}
+          <sc-if value="{{ item.locked }}" hint-placeholder-val="{{ false }}">
+            <span style="margin-left:auto;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(170,195,235,.55);border:1px solid rgba(170,195,235,.3);border-radius:4px;padding:2px 5px">Admin</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+    <div style="margin-top:auto;padding:14px 12px;border-radius:9px;background:rgba(255,255,255,.055)">
+      <div style="font-size:12px;color:#fff;font-weight:500">karthik r</div>
+      <div style="font-size:11.5px;color:rgba(180,205,245,.6);margin-top:3px">{{ roleLabel }}</div>
+      <button onClick="{{ signOut }}" style="margin-top:11px;width:100%;height:31px;border:1px solid rgba(170,195,235,.25);background:transparent;border-radius:6px;color:rgba(205,222,250,.85);font-family:inherit;font-size:12px;cursor:pointer" style-hover="background:rgba(255,255,255,.08);color:#fff">Sign out</button>
+    </div>
+  </aside>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <header style="height:66px;flex:0 0 66px;background:#fff;border-bottom:1px solid #E3EAF5;display:flex;align-items:center;gap:20px;padding:0 26px;position:sticky;top:0;z-index:5">
+      <div style="position:relative;flex:1;max-width:430px;min-width:0">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#8394AD" stroke-width="1.6" style="position:absolute;left:12px;top:11px"><circle cx="6.8" cy="6.8" r="4.8"></circle><path d="m10.6 10.6 3.4 3.4"></path></svg>
+        <input type="text" placeholder="Search cases, clients or entities..." style="width:100%;height:37px;padding:0 12px 0 34px;border:1px solid #E3EAF5;border-radius:7px;background:#F7F9FD;font-size:13.5px;color:#0F2444;outline:none" style-focus="border-color:#2E78EB;background:#fff;box-shadow:0 0 0 3px rgba(46,120,235,.12)">
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:16px">
+        <div style="font-size:12.5px;color:#5B6B85;white-space:nowrap">Monday, 14 September 2026</div>
+        <button style="position:relative;width:35px;height:35px;border:1px solid #E3EAF5;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#33486A" style-hover="background:#F2F6FD;border-color:#C9D8EF">
+          <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.2 7.2a4.8 4.8 0 0 1 9.6 0c0 3.4 1.2 4.5 1.2 4.5H3s1.2-1.1 1.2-4.5Z"></path><path d="M7.3 14.2a1.8 1.8 0 0 0 3.4 0"></path></svg>
+          <span style="position:absolute;top:-3px;right:-3px;min-width:16px;height:16px;border-radius:8px;background:#D4373F;color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid #fff">3</span>
+        </button>
+        <div style="display:flex;align-items:center;gap:10px;padding-left:16px;border-left:1px solid #E9EFF8;cursor:pointer">
+          <div style="width:34px;height:34px;border-radius:50%;background:#1A56C4;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:600;letter-spacing:.02em">{{ initials }}</div>
+          <div style="line-height:1.25">
+            <div style="font-size:13px;font-weight:500;color:#0F2444;white-space:nowrap">{{ karthik r}}</div>
+            <div style="font-size:11.5px;color:#7C8CA6">{{ roleLabel }}</div>
+          </div>
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#7C8CA6" stroke-width="1.6"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"></path></svg>
+        </div>
+      </div>
+    </header>
+
+    <main style="flex:1;padding:30px 30px 44px;min-width:0">
+
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1180px;margin:0 auto;animation:fvFade .25s ease">
+        <h1 style="margin:0 0 6px;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#0F2444">{{ greeting }}</h1>
+        <p style="margin:0 0 26px;font-size:14.5px;color:#5B6B85">Here's an overview of your investigations</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:22px">
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:19px 20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <span style="font-size:12.5px;font-weight:500;color:#5B6B85">Open Cases</span>
+              <span style="width:31px;height:31px;border-radius:8px;background:#EDF3FD;color:#1A56C4;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.2" y="4.5" width="13.6" height="10" rx="1.6"></rect><path d="M6.6 4.5V3.2h4.8v1.3"></path></svg>
+              </span>
+            </div>
+            <div style="font-size:31px;font-weight:600;letter-spacing:-.02em;color:#0F2444;line-height:1">12</div>
+            <div style="font-size:12px;color:#7C8CA6;margin-top:8px">Across 9 clients</div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:19px 20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <span style="font-size:12.5px;font-weight:500;color:#5B6B85">In Progress</span>
+              <span style="width:31px;height:31px;border-radius:8px;background:#EEF2FB;color:#2E78EB;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="6.4"></circle><path d="M9 5.4V9l2.6 1.7"></path></svg>
+              </span>
+            </div>
+            <div style="font-size:31px;font-weight:600;letter-spacing:-.02em;color:#0F2444;line-height:1">5</div>
+            <div style="font-size:12px;color:#7C8CA6;margin-top:8px">2 awaiting review</div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:19px 20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <span style="font-size:12.5px;font-weight:500;color:#5B6B85">Completed</span>
+              <span style="width:31px;height:31px;border-radius:8px;background:#EAF4EE;color:#1E7A4C;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3.4 9.4l3.4 3.3 7.8-7.6"></path></svg>
+              </span>
+            </div>
+            <div style="font-size:31px;font-weight:600;letter-spacing:-.02em;color:#0F2444;line-height:1">31</div>
+            <div style="font-size:12px;color:#7C8CA6;margin-top:8px">This quarter</div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:19px 20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <span style="font-size:12.5px;font-weight:500;color:#5B6B85">Requires Attention</span>
+              <span style="width:31px;height:31px;border-radius:8px;background:#FBEFEF;color:#C1343C;display:flex;align-items:center;justify-content:center">
+                <svg width="15" height="15" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3.2 15.4 14.4H2.6L9 3.2Z"></path><path d="M9 7.4v2.8M9 12.3v.1"></path></svg>
+              </span>
+            </div>
+            <div style="font-size:31px;font-weight:600;letter-spacing:-.02em;color:#0F2444;line-height:1">3</div>
+            
+          </div>
+        </div>
+
+        <div style="position:relative;overflow:hidden;background:#fff;border:1px solid #E3EAF5;border-radius:13px;padding:56px 44px;text-align:center">
+          <div style="position:absolute;inset:0;opacity:.55;background:repeating-linear-gradient(115deg,#F2F6FD 0 1px,transparent 1px 14px)"></div>
+          <div style="position:relative;max-width:520px;margin:0 auto">
+            <div style="width:52px;height:52px;margin:0 auto 22px;border-radius:13px;background:#EDF3FD;color:#1A56C4;display:flex;align-items:center;justify-content:center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20h18"></path><rect x="4.5" y="11" width="3.6" height="6"></rect><rect x="10.2" y="7" width="3.6" height="10"></rect><rect x="15.9" y="13" width="3.6" height="4"></rect></svg>
+            </div>
+            <h2 style="margin:0 0 12px;font-size:24px;font-weight:600;letter-spacing:-.02em;color:#0F2444">Turn data into safer decisions.</h2>
+            <p style="margin:0 0 26px;font-size:14.5px;line-height:1.65;color:#5B6B85;text-wrap:pretty">Use the menu to open your inbox, view existing investigations, or start a new one.</p>
+            <div style="display:flex;gap:11px;justify-content:center;flex-wrap:wrap">
+              <button onClick="{{ openInbox }}" style="height:42px;padding:0 20px;border:none;border-radius:7px;background:#1A56C4;color:#fff;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer" style-hover="background:#12459F">Open Inbox</button>
+              <button onClick="{{ goNew }}" style="height:42px;padding:0 20px;border:1px solid #C9D8EF;border-radius:7px;background:#fff;color:#1A56C4;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer" style-hover="background:#F2F6FD">+ New Investigation</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isConfig }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1000px;margin:0 auto;animation:fvFade .25s ease">
+        <h1 style="margin:0 0 6px;font-size:26px;font-weight:600;letter-spacing:-.02em;color:#0F2444">Configuration</h1>
+        <p style="margin:0 0 26px;font-size:14.5px;color:#5B6B85">Manage system settings, reference data and user access.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px">
+          <sc-for list="{{ configCards }}" as="card" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:15px;background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:20px;cursor:pointer;transition:border-color .15s,box-shadow .15s" style-hover="border-color:#B9CDEC;box-shadow:0 3px 12px rgba(15,36,68,.07)">
+              <span style="width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:#EDF3FD;color:#1A56C4;display:flex;align-items:center;justify-content:center">{{ card.icon }}</span>
+              <span style="flex:1;min-width:0">
+                <span style="display:block;font-size:14.5px;font-weight:600;color:#0F2444">{{ card.title }}</span>
+                <span style="display:block;font-size:12.5px;color:#5B6B85;margin-top:4px">{{ card.desc }}</span>
+              </span>
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#8394AD" stroke-width="1.7"><path d="m5.5 3 4.5 5-4.5 5"></path></svg>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:22px;display:flex;align-items:center;gap:9px;font-size:12.5px;color:#5B6B85;background:#EEF3FB;border:1px solid #DCE6F6;border-radius:9px;padding:13px 15px">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1A56C4" stroke-width="1.6"><path d="M8 2.2 13.2 4.4v3.2c0 3-2.2 5.2-5.2 6.2-3-1-5.2-3.2-5.2-6.2V4.4L8 2.2Z"></path></svg>
+          Administrator session — changes here affect all Finovrr users in this tenant.
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isDenied }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:560px;margin:70px auto 0;background:#fff;border:1px solid #E3EAF5;border-radius:13px;padding:40px;text-align:center;animation:fvFade .25s ease">
+        <div style="width:46px;height:46px;margin:0 auto 20px;border-radius:12px;background:#FBEFEF;color:#C1343C;display:flex;align-items:center;justify-content:center">
+          <svg width="21" height="21" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="8.6" width="12" height="8" rx="1.7"></rect><path d="M7 8.6V6.4a3 3 0 0 1 6 0v2.2"></path></svg>
+        </div>
+        <h2 style="margin:0 0 10px;font-size:20px;font-weight:600;color:#0F2444">Configuration is restricted</h2>
+        <p style="margin:0 0 22px;font-size:14px;line-height:1.6;color:#5B6B85">Your session role is Analyst. Ask a Finovrr administrator for access, or sign in with an administrator account.</p>
+        <button onClick="{{ goDashboard }}" style="height:40px;padding:0 18px;border:1px solid #C9D8EF;border-radius:7px;background:#fff;color:#1A56C4;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer" style-hover="background:#F2F6FD">Back to dashboard</button>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isNew }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:640px;margin:0 auto;animation:fvFade .25s ease">
+        <button onClick="{{ goDashboard }}" style="display:flex;align-items:center;gap:7px;margin-bottom:16px;border:none;background:transparent;padding:0;font-family:inherit;font-size:13px;color:#5B6B85;cursor:pointer" style-hover="color:#1A56C4">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m8 2.5-4 4.5 4 4.5"></path></svg>
+          Back
+        </button>
+        <div style="background:#fff;border:1px solid #E3EAF5;border-radius:13px;overflow:hidden">
+          <div style="padding:24px 28px;border-bottom:1px solid #EDF1F8">
+            <h1 style="margin:0 0 5px;font-size:21px;font-weight:600;letter-spacing:-.015em;color:#0F2444">New Investigation</h1>
+            <p style="margin:0;font-size:13.5px;color:#5B6B85">A case ID is generated once the investigation is started.</p>
+          </div>
+          <div style="padding:26px 28px">
+            <label style="display:block;font-size:12.5px;font-weight:500;color:#33486A;margin-bottom:7px">Client ID</label>
+            <input type="text" value="{{ newClientId }}" onChange="{{ onNewId }}" placeholder="CL-1006" style="width:100%;height:44px;padding:0 13px;border:1px solid #DCE4F0;border-radius:7px;font-size:14px;color:#0F2444;outline:none;margin-bottom:18px" style-focus="border-color:#2E78EB;box-shadow:0 0 0 3px rgba(46,120,235,.14)">
+            <label style="display:block;font-size:12.5px;font-weight:500;color:#33486A;margin-bottom:7px">Client Name</label>
+            <input type="text" value="{{ newClientName }}" onChange="{{ onNewName }}" placeholder="Northwind Partners" style="width:100%;height:44px;padding:0 13px;border:1px solid #DCE4F0;border-radius:7px;font-size:14px;color:#0F2444;outline:none" style-focus="border-color:#2E78EB;box-shadow:0 0 0 3px rgba(46,120,235,.14)">
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:10px;padding:18px 28px;background:#F8FAFE;border-top:1px solid #EDF1F8">
+            <button onClick="{{ goDashboard }}" style="height:40px;padding:0 18px;border:1px solid #DCE4F0;border-radius:7px;background:#fff;color:#33486A;font-family:inherit;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="background:#F1F5FC">Cancel</button>
+            <button onClick="{{ startInvestigation }}" style="height:40px;padding:0 18px;border:none;border-radius:7px;background:#1A56C4;color:#fff;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer" style-hover="background:#12459F">Start Investigation</button>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1080px;margin:0 auto;animation:fvFade .25s ease">
+        <button onClick="{{ openInbox }}" style="display:flex;align-items:center;gap:7px;margin-bottom:16px;border:none;background:transparent;padding:0;font-family:inherit;font-size:13px;color:#5B6B85;cursor:pointer" style-hover="color:#1A56C4">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m8 2.5-4 4.5 4 4.5"></path></svg>
+          Back to Inbox
+        </button>
+        <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:22px">
+          <div style="flex:1;min-width:260px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#1A56C4;background:#EDF3FD;border-radius:5px;padding:3px 7px">{{ activeCase.caseId }}</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:#8A5A00;background:#FCF4E4;border:1px solid #F2E1BE;border-radius:20px;padding:3px 10px">{{ activeCase.status }}</span>
+            </div>
+            <h1 style="margin:0 0 5px;font-size:25px;font-weight:600;letter-spacing:-.02em;color:#0F2444">{{ activeCase.clientName }}</h1>
+            <p style="margin:0;font-size:13.5px;color:#5B6B85">Client {{ activeCase.clientId }} · Last modified {{ activeCase.modified }}</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button style="height:40px;padding:0 16px;border:1px solid #DCE4F0;border-radius:7px;background:#fff;color:#33486A;font-family:inherit;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="background:#F1F5FC">Export summary</button>
+            <button style="height:40px;padding:0 16px;border:none;border-radius:7px;background:#1A56C4;color:#fff;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer" style-hover="background:#12459F">Continue review</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:16px">
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:17px 19px">
+            <div style="font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#8394AD;margin-bottom:9px">Case ID</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#0F2444">{{ activeCase.caseId }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:17px 19px">
+            <div style="font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#8394AD;margin-bottom:9px">Client ID</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:#0F2444">{{ activeCase.clientId }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:17px 19px">
+            <div style="font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#8394AD;margin-bottom:9px">Modified Date</div>
+            <div style="font-size:16px;color:#0F2444">{{ activeCase.modified }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:17px 19px">
+            <div style="font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#8394AD;margin-bottom:9px">Status</div>
+            <div style="font-size:16px;color:#0F2444">{{ activeCase.status }}</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px">
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:22px 24px">
+            <h2 style="margin:0 0 16px;font-size:15px;font-weight:600;color:#0F2444">Case information</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px 24px">
+              <div><div style="font-size:12px;color:#8394AD;margin-bottom:5px">Investigation type</div><div style="font-size:13.5px;color:#0F2444">Transaction monitoring alert</div></div>
+              <div><div style="font-size:12px;color:#8394AD;margin-bottom:5px">Assigned analyst</div><div style="font-size:13.5px;color:#0F2444">karthik r</div></div>
+              <div><div style="font-size:12px;color:#8394AD;margin-bottom:5px">Jurisdiction</div><div style="font-size:13.5px;color:#0F2444">Singapore · Cross-border</div></div>
+              <div><div style="font-size:12px;color:#8394AD;margin-bottom:5px">Risk rating</div><div style="font-size:13.5px;color:#0F2444">Medium–High</div></div>
+              <div><div style="font-size:12px;color:#8394AD;margin-bottom:5px">Linked entities</div><div style="font-size:13.5px;color:#0F2444">7 accounts · 3 counterparties</div></div>
+              <div><div style="font-size:12px;color:#8394AD;margin-bottom:5px">Opened</div><div style="font-size:13.5px;color:#0F2444">02 Sep 2026</div></div>
+            </div>
+            <div style="margin-top:22px;padding-top:20px;border-top:1px solid #EDF1F8">
+              <div style="font-size:12px;color:#8394AD;margin-bottom:7px">Summary</div>
+              <p style="margin:0;font-size:13.5px;line-height:1.7;color:#33486A;text-wrap:pretty">Structured cash deposits across three branches followed by rapid outward transfers to two newly onboarded counterparties. Awaiting source-of-funds documentation before disposition.</p>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #E3EAF5;border-radius:11px;padding:22px 24px">
+            <h2 style="margin:0 0 16px;font-size:15px;font-weight:600;color:#0F2444">Activity</h2>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;gap:11px"><span style="width:8px;height:8px;border-radius:50%;background:#1A56C4;margin-top:5px;flex:0 0 8px"></span><span><span style="display:block;font-size:13px;color:#0F2444">Case reopened for review</span><span style="display:block;font-size:11.5px;color:#8394AD;margin-top:3px">14 Sep 2026 · 09:12</span></span></div>
+              <div style="display:flex;gap:11px"><span style="width:8px;height:8px;border-radius:50%;background:#C9D8EF;margin-top:5px;flex:0 0 8px"></span><span><span style="display:block;font-size:13px;color:#0F2444">Document request sent to relationship manager</span><span style="display:block;font-size:11.5px;color:#8394AD;margin-top:3px">11 Sep 2026 · 16:40</span></span></div>
+              <div style="display:flex;gap:11px"><span style="width:8px;height:8px;border-radius:50%;background:#C9D8EF;margin-top:5px;flex:0 0 8px"></span><span><span style="display:block;font-size:13px;color:#0F2444">Alert triaged and assigned</span><span style="display:block;font-size:11.5px;color:#8394AD;margin-top:3px">02 Sep 2026 · 10:05</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+    </main>
+  </div>
+
+  <sc-if value="{{ inboxOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;padding:34px;background:rgba(9,22,42,.55);backdrop-filter:blur(2px);animation:fvFade .18s ease">
+    <div style="width:100%;max-width:860px;max-height:100%;display:flex;flex-direction:column;background:#fff;border-radius:14px;box-shadow:0 24px 64px rgba(6,18,38,.32);overflow:hidden;animation:fvRise .22s ease">
+      <div style="display:flex;align-items:flex-start;gap:16px;padding:24px 26px 20px;border-bottom:1px solid #EDF1F8">
+        <div style="flex:1;min-width:0">
+          <h2 style="margin:0 0 5px;font-size:20px;font-weight:600;letter-spacing:-.015em;color:#0F2444">Inbox</h2>
+          <p style="margin:0;font-size:13.5px;color:#5B6B85">View and open your existing investigations or start a new one.</p>
+        </div>
+        <button onClick="{{ closeInbox }}" title="Close" style="width:32px;height:32px;flex:0 0 32px;border:1px solid #E3EAF5;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#5B6B85" style-hover="background:#F2F6FD;color:#0F2444;border-color:#C9D8EF">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3l8 8M11 3l-8 8"></path></svg>
+        </button>
+      </div>
+
+      <div style="display:flex;gap:10px;padding:16px 26px;border-bottom:1px solid #EDF1F8;flex-wrap:wrap">
+        <div style="position:relative;flex:1;min-width:240px">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#8394AD" stroke-width="1.6" style="position:absolute;left:12px;top:12px"><circle cx="6.8" cy="6.8" r="4.8"></circle><path d="m10.6 10.6 3.4 3.4"></path></svg>
+          <input type="text" value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search by Client ID, Client Name or Case ID..." style="width:100%;height:39px;padding:0 12px 0 34px;border:1px solid #E3EAF5;border-radius:7px;background:#F7F9FD;font-size:13.5px;color:#0F2444;outline:none" style-focus="border-color:#2E78EB;background:#fff;box-shadow:0 0 0 3px rgba(46,120,235,.12)">
+        </div>
+        <button onClick="{{ cycleFilter }}" style="display:flex;align-items:center;gap:8px;height:39px;padding:0 14px;border:1px solid #E3EAF5;border-radius:7px;background:#fff;color:#33486A;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap" style-hover="background:#F2F6FD;border-color:#C9D8EF">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M4.5 8h7M6.5 12h3"></path></svg>
+          {{ filterLabel }}
+        </button>
+      </div>
+
+      <div style="flex:1;overflow:auto;min-height:0">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="background:#F8FAFE">
+              <th style="text-align:left;padding:11px 26px;font-size:11.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#8394AD;border-bottom:1px solid #EDF1F8">Client ID</th>
+              <th style="text-align:left;padding:11px 16px;font-size:11.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#8394AD;border-bottom:1px solid #EDF1F8">Client Name</th>
+              <th style="text-align:left;padding:11px 16px;font-size:11.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#8394AD;border-bottom:1px solid #EDF1F8">Modified Date</th>
+              
+              <th style="text-align:right;padding:11px 26px;font-size:11.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:#8394AD;border-bottom:1px solid #EDF1F8">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ visibleCases }}" as="row" hint-placeholder-count="5">
+              <tr style="border-bottom:1px solid #F1F4FA" style-hover="background:#F8FAFE">
+                <td style="padding:14px 26px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#33486A">{{ row.clientId }}</td>
+                <td style="padding:14px 16px;font-size:13.5px;font-weight:500;color:#0F2444">{{ row.clientName }}</td>
+                <td style="padding:14px 16px;font-size:13.5px;color:#5B6B85;white-space:nowrap">{{ row.modified }}</td>
+                
+                <td style="padding:14px 26px;text-align:right">
+                  <button onClick="{{ row.open }}" style="border:none;background:transparent;padding:0;font-family:inherit;font-size:13.5px;font-weight:600;color:#1A56C4;cursor:pointer;text-decoration:underline;text-underline-offset:2px" style-hover="color:#0F3E9A">Open</button>
+                </td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:44px 26px;text-align:center;font-size:13.5px;color:#7C8CA6">No cases match "{{ query }}".</div>
+        </sc-if>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 26px;border-top:1px solid #EDF1F8;background:#F8FAFE;flex-wrap:wrap">
+        <span style="font-size:13px;color:#5B6B85">{{ countLabel }}</span>
+        <button onClick="{{ goNew }}" style="height:42px;padding:0 20px;border:none;border-radius:7px;background:#1A56C4;color:#fff;font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;box-shadow:0 1px 2px rgba(15,36,68,.18)" style-hover="background:#12459F">+ New Investigation</button>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Karthik Raman&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Session&quot;},&quot;initialRole&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Administrator&quot;,&quot;Analyst&quot;],&quot;default&quot;:&quot;Administrator&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Session&quot;}}">
+const CASES = [
+  { clientId: "CL-1001", clientName: "ABC Limited", modified: "14 Sep 2026", caseId: "INV-0001", status: "In Progress" },
+  { clientId: "CL-1002", clientName: "Global Traders", modified: "12 Sep 2026", caseId: "INV-0002", status: "Requires Attention" },
+  { clientId: "CL-1003", clientName: "Sunrise Holdings", modified: "10 Sep 2026", caseId: "INV-0003", status: "In Progress" },
+  { clientId: "CL-1004", clientName: "Riverdale Finance", modified: "08 Sep 2026", caseId: "INV-0004", status: "Open" },
+  { clientId: "CL-1005", clientName: "Maple Enterprises", modified: "05 Sep 2026", caseId: "INV-0005", status: "Completed" }
+];
+const FILTERS = ["All cases", "Open", "In Progress", "Requires Attention", "Completed"];
+const svg = (children, w) => React.createElement("svg", { width: w || 17, height: w || 17, viewBox: "0 0 18 18", fill: "none", stroke: "currentColor", strokeWidth: 1.6 }, children);
+const p = (d, k) => React.createElement("path", { d: d, key: k });
+
+class Component extends DCLogic {
+  state = {
+    view: "login", inboxOpen: false, query: "", filter: 0,
+    loginUser: "karthik.r@finovrr.com", loginPass: "demo1234", showPw: false, remember: true,
+    role: null, activeCase: CASES[0], newClientId: "", newClientName: ""
+  };
+
+  role() { return this.state.role || this.props.initialRole || "Administrator"; }
+  isAdmin() { return this.role() === "Administrator"; }
+
+  go = (v) => () => {
+    if (v === "config" && !this.isAdmin()) return this.setState({ view: "denied", inboxOpen: false });
+    this.setState({ view: v, inboxOpen: false });
+  };
+
+  renderVals() {
+    const s = this.state;
+    const userName = this.props.userName || "Karthik Raman";
+    const initials = userName.split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase();
+    const q = s.query.trim().toLowerCase();
+    const filter = FILTERS[s.filter];
+    const visible = CASES.filter(c => {
+      const okF = s.filter === 0 || c.status === filter;
+      const okQ = !q || (c.clientId + " " + c.clientName + " " + c.caseId).toLowerCase().includes(q);
+      return okF && okQ;
+    }).map(c => Object.assign({}, c, {
+      open: () => this.setState({ activeCase: c, inboxOpen: false, view: "case" })
+    }));
+
+    const navDef = [
+      { key: "dashboard", label: "Dashboard", icon: svg([p("M2.4 2.4h5.4v5.4H2.4z", "a"), p("M10.2 2.4h5.4v5.4h-5.4z", "b"), p("M2.4 10.2h5.4v5.4H2.4z", "c"), p("M10.2 10.2h5.4v5.4h-5.4z", "d")]) },
+      { key: "inbox", label: "Inbox", icon: svg([React.createElement("rect", { x: 2.2, y: 3.6, width: 13.6, height: 10.8, rx: 1.7, key: "r" }), p("m2.6 5 6.4 4.6L15.4 5", "l")]) },
+      { key: "config", label: "Config", icon: svg([React.createElement("circle", { cx: 9, cy: 9, r: 2.4, key: "c" }), p("M9 1.8v2M9 14.2v2M1.8 9h2M14.2 9h2M4 4l1.4 1.4M12.6 12.6 14 14M14 4l-1.4 1.4M5.4 12.6 4 14", "s")]), admin: true }
+    ];
+    const activeKey = s.inboxOpen ? "inbox" : (s.view === "denied" ? "config" : s.view);
+    const nav = navDef.map(n => {
+      const active = n.key === activeKey;
+      return {
+        label: n.label, icon: n.icon,
+        locked: !!n.admin && !this.isAdmin(),
+        bg: active ? "#1A56C4" : "transparent",
+        fg: active ? "#ffffff" : "rgba(205,222,250,.78)",
+        go: n.key === "inbox" ? () => this.setState({ inboxOpen: true }) : this.go(n.key)
+      };
+    });
+
+    const configCards = [
+      { title: "User Management", desc: "Manage users, roles and permissions", icon: svg([React.createElement("circle", { cx: 7, cy: 6.4, r: 2.6, key: "c" }), p("M2.4 15c.6-2.6 2.4-4 4.6-4s4 1.4 4.6 4", "a"), p("M12.4 4.6a2.4 2.4 0 0 1 0 4.6", "b")], 19) },
+      { title: "Reference Data", desc: "Manage reference data and lookups", icon: svg([React.createElement("ellipse", { cx: 9, cy: 4.6, rx: 5.8, ry: 2.2, key: "e" }), p("M3.2 4.6v8.8c0 1.2 2.6 2.2 5.8 2.2s5.8-1 5.8-2.2V4.6", "a"), p("M3.2 9c0 1.2 2.6 2.2 5.8 2.2s5.8-1 5.8-2.2", "b")], 19) },
+      { title: "Model Settings", desc: "Configure models and parameters", icon: svg([p("M3 13.6h12", "a"), p("M4.6 13.6V9M9 13.6V4.4M13.4 13.6v-2.8", "b")], 19) },
+      { title: "System Settings", desc: "Manage system preferences", icon: svg([React.createElement("rect", { x: 2.4, y: 3.4, width: 13.2, height: 8.4, rx: 1.6, key: "r" }), p("M6.4 14.6h5.2", "a")], 19) }
+    ];
+
+    return {
+      isLogin: s.view === "login",
+      isApp: s.view !== "login",
+      isDashboard: s.view === "dashboard",
+      isConfig: s.view === "config",
+      isDenied: s.view === "denied",
+      isNew: s.view === "new",
+      isCase: s.view === "case",
+      inboxOpen: s.inboxOpen,
+      nav, configCards, visibleCases: visible,
+      noResults: visible.length === 0,
+      countLabel: "Showing " + visible.length + " of 20 cases",
+      filterLabel: filter,
+      query: s.query,
+      userName, initials,
+      roleLabel: this.role(),
+      greeting: "Good Morning, " + userName.split(" ")[0],
+      activeCase: s.activeCase,
+      loginUser: s.loginUser, loginPass: s.loginPass,
+      pwType: s.showPw ? "text" : "password",
+      remember: s.remember,
+      adminBg: this.isAdmin() ? "#EDF3FD" : "#ffffff",
+      adminFg: this.isAdmin() ? "#1A56C4" : "#33486A",
+      adminBorder: this.isAdmin() ? "#2E78EB" : "#DCE4F0",
+      analystBg: this.isAdmin() ? "#ffffff" : "#EDF3FD",
+      analystFg: this.isAdmin() ? "#33486A" : "#1A56C4",
+      analystBorder: this.isAdmin() ? "#DCE4F0" : "#2E78EB",
+      newClientId: s.newClientId, newClientName: s.newClientName,
+      onUser: e => this.setState({ loginUser: e.target.value }),
+      onPass: e => this.setState({ loginPass: e.target.value }),
+      onRemember: e => this.setState({ remember: e.target.checked }),
+      togglePw: () => this.setState(st => ({ showPw: !st.showPw })),
+      pickAdmin: () => this.setState({ role: "Administrator" }),
+      pickAnalyst: () => this.setState({ role: "Analyst" }),
+      signIn: () => this.setState({ view: "dashboard" }),
+      signOut: () => this.setState({ view: "login", inboxOpen: false }),
+      openInbox: () => this.setState({ inboxOpen: true }),
+      closeInbox: () => this.setState({ inboxOpen: false }),
+      cycleFilter: () => this.setState(st => ({ filter: (st.filter + 1) % FILTERS.length })),
+      onQuery: e => this.setState({ query: e.target.value }),
+      goDashboard: this.go("dashboard"),
+      goNew: () => this.setState({ view: "new", inboxOpen: false }),
+      onNewId: e => this.setState({ newClientId: e.target.value }),
+      onNewName: e => this.setState({ newClientName: e.target.value }),
+      startInvestigation: () => this.setState(st => ({
+        view: "case",
+        activeCase: {
+          clientId: st.newClientId || "CL-1006",
+          clientName: st.newClientName || "Northwind Partners",
+          modified: "14 Sep 2026", caseId: "INV-0006", status: "Open"
+        }
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
